@@ -704,7 +704,7 @@ int comunsOrd(int a[], int na, int b[], int nb) {
 
 // ex36
 
-int comunsOrd (int a[], int na, int b[], int nb){
+int comuns (int a[], int na, int b[], int nb){
     int i;
     int iguais=0;
     for(i=0; i<na;i++){
@@ -715,6 +715,10 @@ int comunsOrd (int a[], int na, int b[], int nb){
     return iguais; 
     
 }
+
+// ex37
+
+
 
 
 
