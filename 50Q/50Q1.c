@@ -3,7 +3,7 @@
 /*
 Notas:
 - verificar :10,26
-- importantes: 13,16
+- importantes: 13,16,33
 
 
 */
@@ -600,6 +600,130 @@ int menosFreq (int v[], int N){
     }
     return menosFreq;
 }
+
+// ex31
+
+int freqInt(int n, int v[],int N){
+    int i;
+    int freq=0;
+    for(i=0; i < N ;i++){
+        if (v[i] == n) freq ++;
+    }
+    return freq;
+}
+
+int maisFreq (int v[], int N){
+    int i;
+    int freqAtual;
+    int freqMax=0;
+    int maisFreq;
+    for(i=0;i<N;i++){
+        if((freqAtual=freqInt(v[i],v,N))>freqMax){
+            freqMax=freqAtual;
+            maisFreq=v[i];
+        }
+
+    }
+    return maisFreq;
+}
+
+// ex32
+
+int maxCresc (int v[], int N){
+    int i;
+    int crescConsec=1;
+    int maiorConsec=0;
+    for(i=0; i< N;i++){
+        if(v[i]<v[i+1]) {
+            crescConsec++;
+        } else if(crescConsec>maiorConsec){
+            maiorConsec=crescConsec;
+            crescConsec=1;
+        }
+    }
+    return maiorConsec;
+
+}
+
+// ex33
+
+int elimRep(int v[], int n) {
+    int i, j = 0; 
+    for (i = 0; i < n; i++) {
+        int duplica = 0; // flag para verificar se é duplicação
+        // verifica se o v[i] já existe nas posições anteriores, k "reseta" para 0 a cada iteração do for externo pois é uma variável local
+        for (int k = 0; k < j; k++) {
+            if (v[i] == v[k]) {
+                duplica = 1; 
+            }
+        }
+        // se não for duplicação, adiciona ao vetor (se duplica=1, !duplica=0 e não copia)
+        if (!duplica) {
+            v[j] = v[i]; 
+            j++; 
+        }
+    }
+
+    return j; 
+}
+
+// ex34
+
+int elimRepOrd (int v[], int n){
+    int i,j=0;
+    for(i=0; i < n;i++){
+        if(!(v[i]==v[i+1])){
+            v[j]=v[i];
+            j++;
+        }
+    }
+    return j;
+}
+
+// ex35
+
+int comunsOrd(int a[], int na, int b[], int nb) {
+    int i = 0, j = 0; 
+    int iguais = 0;   
+
+    // Enquanto não chegarmos ao final de nenhum dos arrays
+    while (i < na && j < nb) {
+        if (a[i] < b[j]) {
+            i++; // Avança no vetor a
+        } else if (a[i] > b[j]) {
+            j++; // Avança no vetor b
+        } else {
+            iguais++; // Encontrou um elemento em comum
+            i++; // Avança em ambos os arrays
+            j++;
+        }
+    }
+
+    return iguais; // Retorna o número de elementos em comum
+}
+
+// ex36
+
+int comunsOrd (int a[], int na, int b[], int nb){
+    int i;
+    int iguais=0;
+    for(i=0; i<na;i++){
+        for(int j=0;j<nb;j++){
+            if(a[i]==b[j]) iguais++;
+        }
+    } 
+    return iguais; 
+    
+}
+
+
+
+
+
+
+
+
+
 
 
 

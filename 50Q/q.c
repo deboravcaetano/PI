@@ -1,21 +1,26 @@
 #include <stdio.h>
 
-int limpaEspaços(char s[]) {
-    int i, j = 0;
-    for (i = 0; s[i] != '\0'; i++) {
-        if (!(s[i] == ' ' && s[i + 1] == ' ')) {
-            s[j] = s[i];
-            j++;
+#include <stdio.h>
+
+int comunsOrd (int a[], int na, int b[], int nb){
+    int i;
+    int iguais=0;
+    for(i=0; i<na;i++){
+        for(int j=0;j<nb;j++){
+            if(a[i]==b[j]) iguais++;
         }
-    }
-    s[j] = '\0'; 
-    return j;
+    } 
+    return iguais; 
+    
 }
 
-int main(){
-    char exemplo[]="aa  b c";
-    char comprimento= limpaEspaços(exemplo);
-    printf("A string modificada é: %s\n",exemplo);
-    printf("O comprimento da nova string é: %d\n",comprimento);
+
+
+int main() {
+    int exemplo[] = {1,2,3,4,5};
+    int exemplo1[]={4,5,6,7,8,9};
+    int comuns = comunsOrd(exemplo,5,exemplo1,6);
+    printf("O número de elementos em comum é: %d\n", comuns);
     return 0;
 }
+
