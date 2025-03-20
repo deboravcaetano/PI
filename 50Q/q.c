@@ -2,32 +2,37 @@
  
 
 
-int triSup(int N, float m[N][N]) {
-    int i, j, triangularSuperior = 1; // i representa as linhas e o j as colunas, temos de ter 0s quando j<i
-    // percorre as linhas da matriz
-    for (i = 1; i < N; i++) { // começa em 1 para ignorar a primeira linha
-        for (j = 0; j < i; j++) { // percorre as colunas
-            if (m[i][j] != 0) { // se encontrar um elemento diferente de zero
-                triangularSuperior = 0; // define a flag como falsa (0)
-            }
+void transposta (int N, float m[N][N]) {
+    int i, j;
+    float armz;
+    for(i = 0; i < N; i++) {
+        for(j = 0; j < i; j++) {
+            armz = m[i][j];
+            m[i][j] = m[j][i];
+            m[j][i] = armz;
         }
     }
-    return triangularSuperior; 
-
 }
 
 
 int main() {
     float matriz[3][3] = {
+        {4, 5, 6},
         {1, 2, 3},
-        {0, 5, 0},
-        {0, 0, 9}
+        {7, 8, 9}
     };
-    if (triSup(3, matriz)) {
-        printf("A matriz é triangular superior.\n");
-    } else {
-        printf("A matriz não é triangular superior.\n");
+
+    transposta(3, matriz);
+    
+    // Imprime a matriz transposta
+    printf("\nMatriz transposta:\n");
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("%.1f ", matriz[i][j]);
+        }
+        printf("\n");
     }
     return 0;
+    
 }
 

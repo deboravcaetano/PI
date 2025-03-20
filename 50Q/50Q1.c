@@ -781,13 +781,21 @@ int main() {
 }
 */
 
+// ex40
 
+void transposta (int N, float m[N][N]) {
+    int i, j;
+    float armz;
+    for(i = 0; i < N; i++) {
+        for(j = 0; j < i; j++) {
+            armz = m[i][j];
+            m[i][j] = m[j][i];
+            m[j][i] = armz;
+        }
+    }
+}
 
-
-
-
-
-
+// ver desenho na folha das 50 questoes
 
 
 
