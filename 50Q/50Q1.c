@@ -718,6 +718,69 @@ int comuns (int a[], int na, int b[], int nb){
 
 // ex37
 
+int minInd (int v[], int n){
+    int i;
+    int indMenor=v[0];
+    for(i=1; i < n;i++){
+        if(v[i]<v[indMenor]){
+            indMenor=i;
+        }
+    }
+    return indMenor;
+}
+
+// ex38
+
+/*
+Ac[0]=v[0]
+Ac[1]=v[0]+v[1]
+Ac[2]=v[0]+v[1]+v[2]
+Ac[3]=v[0]+v[1]+v[2]+v[3], ou seja Ac[3]=Ac[2]+v[3] 
+*/
+
+void somasAc(int v[], int Ac[], int N) {
+    // Inicializa a primeira posição de Ac
+    if (N > 0) {
+        Ac[0] = v[0]; // A soma acumulada do primeiro elemento é ele mesmo
+    }
+    // Calcula as somas acumuladas para os demais elementos
+    for (int i = 1; i < N; i++) {
+        Ac[i] = Ac[i - 1] + v[i]; // Ac[i] é a soma acumulada até v[i]
+    }
+}
+
+// ex39
+
+int triSup(int N, float m[N][N]) {
+    int i, j, triangularSuperior = 1; // i representa as linhas e o j as colunas, temos de ter 0s quando j<i
+    // percorre as linhas da matriz
+    for (i = 1; i < N; i++) { // começa em 1 para ignorar a primeira linha
+        for (j = 0; j < i; j++) { // percorre as colunas
+            if (m[i][j] != 0) { // se encontrar um elemento diferente de zero
+                triangularSuperior = 0; // define a flag como falsa (0)
+            }
+        }
+    }
+    return triangularSuperior; 
+
+}
+
+/*
+int main() {
+    float matriz[3][3] = {
+        {1, 2, 3},
+        {0, 5, 0},
+        {0, 0, 9}
+    };
+    if (triSup(3, matriz)) {
+        printf("A matriz é triangular superior.\n");
+    } else {
+        printf("A matriz não é triangular superior.\n");
+    }
+    return 0;
+}
+*/
+
 
 
 
