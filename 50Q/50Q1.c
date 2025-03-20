@@ -427,6 +427,19 @@ int palindromo(char s[]) {
 
 // ex24
 
+int remRep(char x[]){
+    int i,j=0;
+    for(i=0;x[i]!='\0';i++){
+        if(x[i]!=x[i+1]){
+            x[j]=x[i];
+            j++;
+        }
+    }
+    x[j]='\0';
+    return j;
+}
+
+/*
 int remRep (char x[]){
     int i,j=0;
     for(i=0;x[i]!='\0';i++){
@@ -440,8 +453,30 @@ int remRep (char x[]){
     return j;
 }  
 
+int main(){
+    char exemplo[]="aaabaaabbbaaa";
+    int novoComprimento = remRep(exemplo);
+    printf("A string modificada é: %s\n",exemplo);
+    printf("O tamanho da nova string é: %d\n", novoComprimento);
+    return 0;
+}
+*/
+
 // ex25
 
+int limpaEspaços(char s[]) {
+    int i, j = 0;
+    for (i = 0; s[i] != '\0'; i++) {
+        if (!(s[i] == ' ' && s[i + 1] == ' ')) {
+            s[j] = s[i];
+            j++;
+        }
+    }
+    s[j] = '\0'; 
+    return j;
+}
+
+/*
 int limpaEspacos(char t[]) {
     int i, j = 0;
 
@@ -458,6 +493,7 @@ int limpaEspacos(char t[]) {
     t[j] = '\0';
     return j; 
 }
+*/
 
 // ex26
 
