@@ -15,7 +15,7 @@ int contemChar(char s[],char c){
 O objetivo é que não faça comparações desnecessárias, ou seja, se já encontrou o elemento,
 não precisa de procurar a sua existência nos próximos índices.
 
-O loop for deve parar quando for encontrado o elemento, ou seja quando encontrado == 1, ele realiza o ciclo for enquanto
+O loop ´for' deve parar quando for encontrado o elemento, ou seja quando encontrado == 1, ele realiza o ciclo 'for' enquanto
 não encontrar -> !(encontrado==1).
 
 */
