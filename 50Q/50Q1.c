@@ -2,7 +2,7 @@
 
 /*
 Notas:
-- verificar :10,26
+- verificar :10,26,34
 - importantes: 13,16,33
 
 
@@ -675,15 +675,17 @@ int elimRep(int v[], int n) {
 
 // ex34
 
-int elimRepOrd (int v[], int n){
-    int i,j=0;
-    for(i=0; i < n;i++){
-        if(!(v[i]==v[i+1])){
-            v[j]=v[i];
-            j++;
+int elimRepOrd(int v[], int n) {
+    int i, j = 0;
+    for (i = 0; i < n - 1; i++) { // itera até o penúltimo elemento
+        if (v[i] != v[i + 1]) { // cuidado ao comparar com posições fora do array por isso ´i<n-1´
+            v[j] = v[i]; 
+            j++; 
         }
     }
-    return j;
+    v[j] = v[n - 1]; 
+    j++; 
+    return j; 
 }
 
 // ex35

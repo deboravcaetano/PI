@@ -1,32 +1,26 @@
 #include <stdio.h>
 
-char truncW(char t[], int n) {
-    int i;
-    int j=0;
-    int contLetras = 0;  
-
-    for(i=0;t[i]!='\0';i++){
-        if (contLetras < n && t[i] != ' ') {
-            // Se ainda não atingimos o limite da palavra e não é um espaço
-            t[j] = t[i];
-            j++;
-            contLetras++;
-        } 
-        else if (t[i] == ' ') {
-            // Encontramos um espaço: termina a palavra atual
-            t[j] = ' ';
-            j++;
-            contLetras = 0;  // reinicia o contador para a próxima palavra
+int elimRepOrd(int v[], int n) {
+    int i, j = 0;
+    for (i = 0; i < n - 1; i++) { // itera até o penúltimo elemento
+        if (v[i] != v[i + 1]) { // cuidado ao comparar com posições fora do array por isso ´i<n-1´
+            v[j] = v[i]; 
+            j++; 
         }
-        // Se contPalavra >= n e não é espaço, ignoramos o caracter (truncamento)
     }
-    
-    t[j] = '\0';  
+    v[j] = v[n - 1]; 
+    j++; 
+    return j; 
 }
 
 int main(){
-    char t[] ="liberdade, igualdade e fraternidade";
-    char novaString = truncW(t,4);
-    printf("A nova string é:%s\n",t);
+    int t[] ={1,1,2,3,3,4,4};
+    int numeroElem = elimRepOrd(t,7);
+    printf("O novo número de elementos é: %d\n",numeroElem);
+    printf("O novo vetor é: ");
+    for(int i=0; t[i]<7;i++){
+        printf("%d ", t[i]);
+    }
+    printf("\n");
     return 0;
 }
