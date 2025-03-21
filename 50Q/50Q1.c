@@ -231,21 +231,27 @@ void strnoV(char s[]) {
 
 // ex13
 
-void truncW (char t[], int n){
-    int i,j,cont=0;
+char truncW(char t[], int n) {
+    int i;
+    int j=0;
+    int contLetras = 0;  
 
-    for(i=0,j=0; t[i]!='\0';i++){
-        if(t[i]==' '){ // se acabei uma palavra
-            cont = 0; // como vai começar a copiar uma nova palavra, reseto o número de caracteres copiados
-            t[j]=' '; // adiciona um espaço de onde trunquei a ultima
-            j++; // avanço para a posição a seguir ao novo espaço
-        } else if (cont < n){
-            t[j]=t[i];
-            cont++;
+    for(i=0;t[i]!='\0';i++){
+        if (contLetras < n && t[i] != ' ') {
+            // se ainda não atingimos o limite da palavra e não é um espaço
+            t[j] = t[i];
             j++;
+            contLetras++;
+        } 
+        else if (t[i] == ' ') {
+            // encontramos um espaço: termina a palavra atual
+            t[j] = ' ';
+            j++;
+            contLetras = 0;  // reinicia o contador para a próxima palavra
         }
-    }
-    t[j]='\0';
+        // se contPalavra >= n e não é espaço, ignoramos o caracter (truncamento)
+    } 
+    t[j] = '\0';  
 }
 
 // ex14

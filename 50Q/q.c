@@ -1,31 +1,32 @@
 #include <stdio.h>
- 
 
-
-int contemChar(char s[],char c){
+char truncW(char t[], int n) {
     int i;
-    int encontrado = 0;
-    for(i=0; s[i] != '\0' && !(encontrado==1);i++){
-        if(s[i]==c){
-            encontrado=1;
+    int j=0;
+    int contLetras = 0;  
+
+    for(i=0;t[i]!='\0';i++){
+        if (contLetras < n && t[i] != ' ') {
+            // Se ainda não atingimos o limite da palavra e não é um espaço
+            t[j] = t[i];
+            j++;
+            contLetras++;
+        } 
+        else if (t[i] == ' ') {
+            // Encontramos um espaço: termina a palavra atual
+            t[j] = ' ';
+            j++;
+            contLetras = 0;  // reinicia o contador para a próxima palavra
         }
+        // Se contPalavra >= n e não é espaço, ignoramos o caracter (truncamento)
     }
-    return encontrado;
+    
+    t[j] = '\0';  
 }
 
-
 int main(){
-    char s[] ="a abbc";
-    char C;
-
-    printf("Insira um caracter:");
-    scanf("%c\n",&C);
-
-    if(contemChar(s,C)){
-        printf("O caracter foi encontrado.\n");
-    }
-    else {
-        printf("O caracter não foi encontrado.\n");
-    }
+    char t[] ="liberdade, igualdade e fraternidade";
+    char novaString = truncW(t,4);
+    printf("A nova string é:%s\n",t);
     return 0;
 }
