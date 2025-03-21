@@ -2,7 +2,7 @@
  
 int contemChar(char s[],char c){
     int i;
-    int encontrado = 0; // usamos uma flag para determinar quando encerrar o loop for
+    int encontrado = 0; // usamos uma flag para determinar quando encerrar o loop ´for´
     for(i=0; s[i] != '\0' && !(encontrado==1);i++){ 
         if(s[i]==c){
             encontrado=1;
