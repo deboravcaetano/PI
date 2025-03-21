@@ -1,26 +1,22 @@
 #include <stdio.h>
 
-int elimRepOrd(int v[], int n) {
-    int i, j = 0;
-    for (i = 0; i < n - 1; i++) { // itera até o penúltimo elemento
-        if (v[i] != v[i + 1]) { // cuidado ao comparar com posições fora do array por isso ´i<n-1´
-            v[j] = v[i]; 
-            j++; 
+void addTo(int N, int M, int a[N][M], int b[N][M]) {
+    int i, j;
+    for(i = 0; i < N; i++) {
+        for(j = 0; j < M; j++) {
+            a[i][j] += b[i][j];
         }
     }
-    v[j] = v[n - 1]; 
-    j++; 
-    return j; 
 }
 
 int main(){
-    int t[] ={1,1,2,3,3,4,4};
-    int numeroElem = elimRepOrd(t,7);
-    printf("O novo número de elementos é: %d\n",numeroElem);
-    printf("O novo vetor é: ");
-    for(int i=0; t[i]<7;i++){
-        printf("%d ", t[i]);
+    int a[3][4] = { {3,4,5,1}, {6, 7,8,1} ,{9,10,11,1}};
+    int b[3][4] = { {0,1, 2,1}, {3, 1,1,1},{1,1,1,1} };
+    addTo(3,4,a,b);
+    for (int i = 0; i < 3; i++) {
+        for(int j=0;j<4;j++){
+            printf("%d ", a[i][j]);
+        }
     }
     printf("\n");
-    return 0;
 }
