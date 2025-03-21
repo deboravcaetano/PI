@@ -171,10 +171,6 @@ int strcmp(const char s1[], const char s2[]) {
 char *strstr(char s1[], char s2[]) {
     int i, j;
     
-    // Se s2 for uma string vazia, retorna s1
-    if (s2[0] == '\0') {
-        return NULL;
-    }
     
     for (i = 0; s1[i] != '\0'; i++) {
         // Verifica se os caracteres de s2 correspondem aos de s1 a partir de i
@@ -185,9 +181,7 @@ char *strstr(char s1[], char s2[]) {
             return &s1[i];
         }
     }
-    
-    // Se não encontrar a substring, retorna NULL
-    return NULL;
+
 }
 
 // ex11
