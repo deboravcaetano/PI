@@ -1,22 +1,24 @@
 #include <stdio.h>
 
-void addTo(int N, int M, int a[N][M], int b[N][M]) {
-    int i, j;
-    for(i = 0; i < N; i++) {
-        for(j = 0; j < M; j++) {
-            a[i][j] += b[i][j];
-        }
+float mediaSequencia(){
+    int n, j=0;
+    float media=0;
+
+    scanf("%d", &n);
+    float soma = 0;
+    while(n!=0){
+        soma+=n;
+        scanf("%d", &n);
+        j++;
     }
+
+    media=soma/j;
+
+    printf("A média da sequência é:%f\n", media);
+    return media;
 }
 
 int main(){
-    int a[3][4] = { {3,4,5,1}, {6, 7,8,1} ,{9,10,11,1}};
-    int b[3][4] = { {0,1, 2,1}, {3, 1,1,1},{1,1,1,1} };
-    addTo(3,4,a,b);
-    for (int i = 0; i < 3; i++) {
-        for(int j=0;j<4;j++){
-            printf("%d ", a[i][j]);
-        }
-    }
-    printf("\n");
+    mediaSequencia();
+    return 0;
 }

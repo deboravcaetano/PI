@@ -30,15 +30,15 @@ int maiorSequencia(int n){
 
 // ex2
 
-int mediaSequencia(){
-    int n, j=0;
+float mediaSequencia(){
+    int n, j=0; // j conta o número de números lidos
     float media=0;
 
     scanf("%d", &n);
-    int soma = n;
+    float soma = 0;
     while(n!=0){
-        scanf("%d", &n);
         soma+=n;
+        scanf("%d", &n);
         j++;
     }
 
@@ -127,7 +127,7 @@ char *strcat(char s1[], char s2[]) {
 
     s1[i] = '\0';
 
-    return s1; // Retorna um ponteiro para a string concatenada (s1)
+    return s1; 
 }
 
 // ex8
