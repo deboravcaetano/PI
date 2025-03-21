@@ -1,7 +1,5 @@
 #include <stdio.h>
  
-
-
 int contemChar(char s[],char c){
     int i;
     int encontrado = 0;
