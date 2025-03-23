@@ -1,24 +1,17 @@
 #include <stdio.h>
 
-float mediaSequencia(){
-    int n, j=0;
-    float media=0;
-
-    scanf("%d", &n);
-    float soma = 0;
-    while(n!=0){
-        soma+=n;
-        scanf("%d", &n);
-        j++;
-    }
-
-    media=soma/j;
-
-    printf("A média da sequência é:%f\n", media);
-    return media;
+int cardinalMSet (int N, int v[N]) {
+    int i, len = 0;
+    for(i = 0; i < N; i++) len += v[i];
+    return len;
 }
 
 int main(){
-    mediaSequencia();
+    int i;
+    int v[8] = {0, 2, 0, 0, 1, 0, 0, 3};
+    int cardinal= cardinalMSet(8,v);
+    printf("O número de elementos do conjunto é:%d\n",cardinal);
     return 0;
+
+    
 }

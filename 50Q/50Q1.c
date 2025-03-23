@@ -675,7 +675,30 @@ int elimRepOrd(int v[], int n) {
         if (v[i] != v[i + 1]) { // cuidado ao comparar com posições fora do array por isso ´i<n-1´
             v[j] = v[i]; 
             j++; 
+        }int unionSet(int N, int v1[N], int v2[N], int r[N]) {
+    int i;
+    for (i = 0; i < N; i++) {
+        if (v1[i] == 1 || v2[i] == 1) {
+            r[i] = 1;
+        } else {
+            r[i] = 0;
         }
+    }
+    return 0; 
+}
+
+int main(){
+    int i;
+    int v1[8]={0,1,0,0,1,0,0,1};
+    int v2[8]={1,0,0,1,1,1,0,1};
+    int r[8];
+
+    unionSet(8,v1,v2,r);
+
+    for(i=0; i<8;i++) printf("%d",r[i]);
+    printf("\n");
+    return 0;
+}
     }
     v[j] = v[n - 1]; 
     j++; 
@@ -826,6 +849,77 @@ int main(){
 */
 
 // ex42
+
+int unionSet(int N, int v1[N], int v2[N], int r[N]) {
+    int i;
+    for (i = 0; i < N; i++) {
+        if (v1[i] == 1 || v2[i] == 1) {
+            r[i] = 1;
+        } else {
+            r[i] = 0;
+        }
+    }
+    return 0; 
+}
+
+/*
+int main(){
+    int i;
+    int v1[8]={0,1,0,0,1,0,0,1};
+    int v2[8]={1,0,0,1,1,1,0,1};
+    int r[8];
+
+    unionSet(8,v1,v2,r);
+
+    for(i=0; i<8;i++) printf("%d",r[i]);
+    printf("\n");
+    return 0;
+}
+*/
+
+// ex43
+
+int intersectSet(int N, int v1[N], int v2[N], int r[N]) {
+    int i;
+    for (i = 0; i < N; i++) {
+        if (v1[i] == 1 && v2[i] == 1) {
+            r[i] = 1;
+        } else {
+            r[i] = 0;
+        }
+    }
+    return 0; 
+}
+
+// ex44
+
+int intersectMSet (int N, int v1[N], int v2[N], int r[N]){
+    int i;
+    for(i=0; i<N; i++){
+        if (v1[i]<=v2[i]) r[i]=v1[i];
+        else r[i]=v2[i];
+    }
+}
+
+// ex45
+
+int unionMSet (int N, int v1[N], int v2[N], int r[N]){
+    int i;
+    for(i=0; i<N; i++){
+        if (v1[i]>=v2[i]) r[i]=v1[i];
+        else r[i]=v2[i];
+    }
+}
+
+// ex46
+
+int cardinalMSet (int N, int v[N]) {
+    int i, len = 0;
+    for(i = 0; i < N; i++) len += v[i];
+    return len;
+}
+
+
 
 
 
