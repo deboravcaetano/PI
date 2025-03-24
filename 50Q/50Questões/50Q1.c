@@ -1,50 +1,40 @@
+// 50 QUESTÕES 
 #include <stdio.h>
-
-/*
-Notas:
-- verificar :10,26,34
-- importantes: 13,16,33
-
-
-*/
 
 // ex1
 
-int maiorSequencia(int n){
-    int n ,maior=0;
+int maiorSequencia() {
+    int n, maior;
 
     scanf("%d", &n);
     maior = n;
 
-    while(n!=0){
+    while (n != 0) {
         scanf("%d", &n);
-        if(n>maior){
-            maior=n;
+        if (n > maior && n != 0) {
+            maior = n;
         }
     }
-    printf("O maior valor da sequência é:%d\n", maior);
+
     return maior;
-
 }
-
 
 // ex2
 
-float mediaSequencia(){
-    int n, j=0; // j conta o número de números lidos
-    float media=0;
+float mediaSequencia() {
+    int n, cont = 0; 
+    float media = 0;
+    float soma = 0;
 
     scanf("%d", &n);
-    float soma = 0;
-    while(n!=0){
-        soma+=n;
-        scanf("%d", &n);
-        j++;
+
+    while (n != 0) {
+        soma += n;
+        cont++;
+        scanf("%d", &n); 
     }
+    media=soma/cont;
 
-    media=soma/j;
-
-    printf("A média da sequência é:%f\n", media);
     return media;
 }
 
@@ -64,8 +54,6 @@ int segundoMaior(){
         }
     }
 
-    printf("%d", smaior);
-
     return smaior;
 }
 
@@ -79,31 +67,27 @@ int bitsUm (unsigned int n){
         }
         n = n/2;
     }
+
+    return cont;
 }
 
 // ex5
 
 int trailingZ(unsigned int n) {
     int cont = 0;
-    while (n > 0 && (n % 2 == 0)) {  // Continua enquanto o último bit é 0
+    while (n > 0 && (n % 2 == 0)) {  
         cont++;
         n = n / 2; 
     }
     return cont; 
 }
 
-/*
-Nota: o 0 ou 1 que sai da primeira divisão por 2 é o do bit menos signficativo
-Ex: n = 12 que em binário é 1100, trailingZ vai verificar se n em binário tem 0s da direita para a esquerda
-*/
-
-
 // ex6
 
 int qDigFor(unsigned int n) {
     int count;
     if (n == 0) {
-        return 1;  // Caso especial: o número 0 tem 1 dígito
+        return 1;  
     }
     for (count = 0; n > 0; count++) {
         n /= 10;
@@ -116,15 +100,11 @@ int qDigFor(unsigned int n) {
 char *strcat(char s1[], char s2[]) {
     int i, j;
 
-    // Encontra o final da string s1
-    for (i = 0; s1[i] != '\0'; i++); // Loop vazio: apenas avança 'i'
+    for (i = 0; s1[i] != '\0'; i++); 
 
-    // Copia s2 para o final de s1
     for (j = 0; s2[j] != '\0'; j++) {
         s1[i++] = s2[j];
     }
-
-
     s1[i] = '\0';
 
     return s1; 
@@ -155,34 +135,18 @@ int strcmp(const char s1[], const char s2[]) {
             return 1;  // s1 é maior que s2
         }
     }
-
-    // Se chegamos aqui, uma das strings (ou ambas) terminou
+   
+   // se chegar aqui, uma das string acabou
     if (s1[i] == '\0' && s2[i] == '\0') {
-        return 0;  // As strings são iguais
+        return 0;  
     } else if (s1[i] == '\0') {
-        return -1; // s1 é mais curta, então é menor
+        return -1; 
     } else {
-        return 1;  // s2 é mais curta, então s1 é maior
+        return 1;  
     }
 }
 
 // ex10
-
-char *strstr(char s1[], char s2[]) {
-    int i, j;
-    
-    
-    for (i = 0; s1[i] != '\0'; i++) {
-        // Verifica se os caracteres de s2 correspondem aos de s1 a partir de i
-        for (j = 0; s2[j] != '\0' && s1[i + j] == s2[j]; j++);
-        
-        // Se chegamos ao final de s2, encontramos a substring
-        if (s2[j] == '\0') {
-            return &s1[i];
-        }
-    }
-
-}
 
 // ex11
 
@@ -210,6 +174,23 @@ int vogal(char c) {
             c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U');
 }
 
+
+int strnoV(char t[]) {
+    int i, j = 0; // 'i' percorre o array original e 'j' ajuda a construir o novo array
+
+    for (i = 0; t[i] != '\0'; i++) {
+        if (vogal([i])) { // se não é uma vogal, apenas avança no 'i' e não no 'j'
+        } else {
+            t[j] = t[i]; 
+            j++; 
+        }
+    }
+
+    t[j] = '\0';
+}
+
+/* outra forma:
+
 void strnoV(char s[]) {
     int i, j;
     for (i = 0, j = 0; s[i] != '\0'; i++) {
@@ -220,8 +201,7 @@ void strnoV(char s[]) {
     }
     s[j] = '\0';
 }
-
-// ver explicação folha 50 questões
+*/
 
 // ex13
 
@@ -231,19 +211,16 @@ char truncW(char t[], int n) {
     int contLetras = 0;  
 
     for(i=0;t[i]!='\0';i++){
-        if (contLetras < n && t[i] != ' ') {
-            // se ainda não atingimos o limite da palavra e não é um espaço
+        if (contLetras < n && t[i] != ' ') { // segunda condição: para não contar o espaço como um caracter caso contLetras < n
             t[j] = t[i];
             j++;
             contLetras++;
         } 
         else if (t[i] == ' ') {
-            // encontramos um espaço: termina a palavra atual
             t[j] = ' ';
             j++;
-            contLetras = 0;  // reinicia o contador para a próxima palavra
+            contLetras = 0;  
         }
-        // se contPalavra >= n e não é espaço, ignoramos o caracter (truncamento)
     } 
     t[j] = '\0';  
 }
@@ -260,7 +237,10 @@ int freqC(char ch, char s[]) {
 
 char charMaisFreq(char s[]) {
     char maisFreq = 0;
-    int i, freqMax = 0, freqAtual;
+    int i;
+    int freqMax = 0
+    int freqAtual;
+
     for(i = 0; s[i]; i++) {
         if((freqAtual = freqC(s[i],s)) > freqMax) {
             freqMax = freqAtual;
@@ -273,8 +253,10 @@ char charMaisFreq(char s[]) {
 // ex15
 
 int iguaisConsecutivos (char s[]) {
-    int i, consec = 1, max = 0;
-    for(i = 0; s[i]; i++) {
+    int i;
+    int consec = 1
+    int max = 0;
+    for(i = 0; s[i] != '\0'; i++) {
         if(s[i] == s[i + 1]) consec++;
         else {
             if(consec > max) max = consec;
@@ -290,7 +272,7 @@ int iguaisConsecutivos (char s[]) {
 
 int maiorPrefixo (char s1 [], char s2 []) {
     int i;
-    for(i = 0; s1[i] == s2[i] && s1[i]; i++);
+    for(i = 0; s1[i] != '\0' && s2[i] != '\0' && s1[i] == s2[i]; i++);
     return i;
 }
 
@@ -306,6 +288,7 @@ int maiorSufixo (char s1 [], char s2 []){
     int i,j,cont;
     int tam1 = tamanhoString(s1);
     int tam2 = tamanhoString(s2);
+
     for(i=tam1-1,j=tam2-1; s1[i] ==  s2[j] && i != 0 && j != 0; i--,j--) cont++;
     return cont;
 
@@ -326,7 +309,7 @@ int sufPref (char s1[], char s2[]) {
 
 int contaPal(char s[]) {
     int i, cont = 0;
-    int dentroDaPalavra = 0; // vai funcionar como flag indicar se estamos dentro de uma palavra
+    int dentroDaPalavra = 0; 
 
     for (i = 0; s[i] != '\0'; i++) {
         if (s[i] != ' ' && !dentroDaPalavra) { 
@@ -340,13 +323,6 @@ int contaPal(char s[]) {
 
     return cont; 
 } 
-
-/*
--> o ' ' indica se estou dentro de uma palavra ou não, se s[i]= ' ' então não estou dentro de uma palavra
--> se s[i] não é um ' ' e estamos dentro de uma palavra, então aumentamos o contador que conta o número de palavras
-
-nota: podemos colocar no (!dentroDaPalavrs)==1, na próxima iteração já não entra nesse if pois (!1) é 0 
-*/
 
 // ex21
 
@@ -364,7 +340,6 @@ int contaVogais(char s[]) {
     }
     return numvogais;
 }
-
 
 // ex22
 
@@ -393,18 +368,17 @@ int contida(char a[], char b[]) {
 /*
 sem dois returns:
 
-// função que verifica todos os caracteres
 int contida(char a[], char b[]) {
     int i;
-    int contido = 1; // Assume que todos os caracteres estão contidos
+    int contido = 1; // assume que todos os caracteres estão contidos
 
     for (i = 0; a[i] != '\0' && contido == 1; i++) {
         if (charCont(a[i], b) == 0) {
-            contido = 0; // Se algum caractere não estiver em b, marca como falso
+            contido = 0; 
         }
     }
 
-    return contido; // Retorna o resultado
+    return contido; 
 }
 
 */
@@ -413,7 +387,23 @@ int contida(char a[], char b[]) {
 
 int palindromo(char s[]) {
     int i, j;
-    int igual = 1; // assume que a string é um palíndromo
+    int tam = strlen(s);
+
+    for (i = 0, j = tam - 1; i < j; i++, j--) {
+        if (s[i] != s[j]) {
+            return 0; 
+        }
+    }
+
+    return 1; 
+}
+
+/*
+sem dois returns:
+
+int palindromo(char s[]) {
+    int i, j;
+    int igual = 1; 
     int tam = strlen(s); 
 
     for (i = 0, j = tam - 1; i < j && igual == 1; i++, j--) {
@@ -425,7 +415,24 @@ int palindromo(char s[]) {
     return igual; 
 }
 
+*/
+
 // ex24
+
+int remRep(char x[]){
+    int i,j=0;
+    for(i=0;x[i]!='\0';i++){
+        if(x[i]==x[i+1]){
+        } else {
+            x[j]=x[i];
+            j++;
+        }
+    }
+    x[j]='\0';
+    return j;
+}
+
+/* outra forma:
 
 int remRep(char x[]){
     int i,j=0;
@@ -439,30 +446,26 @@ int remRep(char x[]){
     return j;
 }
 
-/*
-int remRep (char x[]){
-    int i,j=0;
-    for(i=0;x[i]!='\0';i++){
-        while(x[i]==x[i+1]){
-            for(j=i;x[j]!='\0';j++){
-                x[j]=x[j+1];
-            }
-        }
-    } 
-    x[j] = '\0'; 
-    return j;
-}  
-
-int main(){
-    char exemplo[]="aaabaaabbbaaa";
-    int novoComprimento = remRep(exemplo);
-    printf("A string modificada é: %s\n",exemplo);
-    printf("O tamanho da nova string é: %d\n", novoComprimento);
-    return 0;
-}
 */
 
 // ex25
+
+int limpaEspacos(char t[]) {
+    int i, j = 0;
+
+    for (i = 0; t[i] != '\0'; i++) {        
+        if (t[i] == ' ' && t[i + 1] == ' ') {
+        } else {
+            t[j] = t[i]; 
+            j++; 
+        }
+    }
+
+    t[j] = '\0';
+    return j; 
+}
+
+/* outra forma:
 
 int limpaEspaços(char s[]) {
     int i, j = 0;
@@ -474,24 +477,6 @@ int limpaEspaços(char s[]) {
     }
     s[j] = '\0'; 
     return j;
-}
-
-/*
-int limpaEspacos(char t[]) {
-    int i, j = 0;
-
-
-    for (i = 0; t[i] != '\0'; i++) {
-        // se o caractere atual for um espaço e o próximo também for um espaço, não copia
-        if (t[i] == ' ' && t[i + 1] == ' ') {
-        } else {
-            t[j] = t[i]; 
-            j++; 
-        }
-    }
-
-    t[j] = '\0';
-    return j; 
 }
 */
 
@@ -520,32 +505,20 @@ void merge (int r [], int a[], int b[], int na, int nb){
     }
 }
 
+// ex28
+
+int crescente(int a[], int i, int j) {
+    int x;
+    for (x = i; x < j; x++) {
+        if (a[x] > a[x + 1]) {
+            return 0; 
+        }
+    }
+    return 1; 
+}
 
 /*
-int main() {
-    int a[] = {1, 3, 5, 7}; // Vetor a
-    int na = 4; // Tamanho de a
-
-    int b[] = {2, 4, 6, 8, 10}; // Vetor b
-    int nb = 5; // Tamanho de b
-
-    int r[na + nb]; // Vetor resultante
-
-    // Chama a função merge
-    merge(r, a, b, na, nb);
-
-    // Imprime o vetor resultante
-    printf("Vetor resultante (merge de a e b): ");
-    for (int i = 0; i < na + nb; i++) {
-        printf("%d ", r[i]);
-    }
-    printf("\n");
-
-    return 0;
-}
-*/
-
-// ex28 
+sem dois returns:
 
 int crescente(int a[], int i, int j) {
     int x;
@@ -557,6 +530,7 @@ int crescente(int a[], int i, int j) {
     }
     return res; 
 }
+*/
 
 // ex29
 
@@ -648,17 +622,16 @@ int maxCresc (int v[], int N){
 // ex33
 
 int elimRep(int v[], int n) {
-    int i, j = 0; 
+    int i;
+    int j = 0; 
     for (i = 0; i < n; i++) {
-        int duplica = 0; // flag para verificar se é duplicação
-        // verifica se o v[i] já existe nas posições anteriores, k "reseta" para 0 a cada iteração do for externo pois é uma variável local
-        for (int k = 0; k < j; k++) {
+        int ehDuplicação = 0; 
+        for (int k = 0; k < j; k++) { 
             if (v[i] == v[k]) {
-                duplica = 1; 
+                ehDuplicação = 1; 
             }
-        }
-        // se não for duplicação, adiciona ao vetor (se duplica=1, !duplica=0 e não copia)
-        if (!duplica) {
+        }        
+        if (!ehDuplicação) {
             v[j] = v[i]; 
             j++; 
         }
@@ -666,43 +639,47 @@ int elimRep(int v[], int n) {
 
     return j; 
 }
+
+/*
+explicação:
+
+int elimRep(int v[], int n) {
+    int i;
+    int j = 0; // controla a posição ondes os elementos único são colocados 
+    for (i = 0; i < n; i++) {
+        int ehDuplicação = 0; 
+        // verifica se o v[i] já existe nas posições anteriores, 'k' "reseta" para 0 a cada iteração do 'for' externo 
+        for (int k = 0; k < j; k++) { // k percorre a parte que já foi processada, de 0 a j-1 que contem os elementos únicos 
+//que já foram encontrados e copiados
+            if (v[i] == v[k]) {
+                ehDuplicação = 1; 
+            }
+        }
+        // se o elemento não existia nas posições anteriores, adiciona ao vetor (se duplica=1, !duplica=0 e não copia)
+        if (!ehDuplicação) {
+            v[j] = v[i]; 
+            j++; 
+        }
+    }
+
+    return j; 
+}
+*/
 
 // ex34
 
 int elimRepOrd(int v[], int n) {
-    int i, j = 0;
-    for (i = 0; i < n - 1; i++) { // itera até o penúltimo elemento
-        if (v[i] != v[i + 1]) { // cuidado ao comparar com posições fora do array por isso ´i<n-1´
-            v[j] = v[i]; 
-            j++; 
-        }int unionSet(int N, int v1[N], int v2[N], int r[N]) {
     int i;
-    for (i = 0; i < N; i++) {
-        if (v1[i] == 1 || v2[i] == 1) {
-            r[i] = 1;
-        } else {
-            r[i] = 0;
+    int j = 0; 
+
+    for (i = 0; i < n; i++) {
+        if (v[i] != v[j]) { 
+            j++;
+            v[j] = v[i]; 
         }
     }
-    return 0; 
-}
 
-int main(){
-    int i;
-    int v1[8]={0,1,0,0,1,0,0,1};
-    int v2[8]={1,0,0,1,1,1,0,1};
-    int r[8];
-
-    unionSet(8,v1,v2,r);
-
-    for(i=0; i<8;i++) printf("%d",r[i]);
-    printf("\n");
-    return 0;
-}
-    }
-    v[j] = v[n - 1]; 
-    j++; 
-    return j; 
+    return j + 1; 
 }
 
 // ex35
@@ -711,20 +688,20 @@ int comunsOrd(int a[], int na, int b[], int nb) {
     int i = 0, j = 0; 
     int iguais = 0;   
 
-    // Enquanto não chegarmos ao final de nenhum dos arrays
+    
     while (i < na && j < nb) {
         if (a[i] < b[j]) {
             i++; // Avança no vetor a
         } else if (a[i] > b[j]) {
-            j++; // Avança no vetor b
+            j++; // avança no vetor b
         } else {
-            iguais++; // Encontrou um elemento em comum
-            i++; // Avança em ambos os arrays
+            iguais++; // encontrou um elemento em comum
+            i++; // avança em ambos os arrays
             j++;
         }
     }
 
-    return iguais; // Retorna o número de elementos em comum
+    return iguais; 
 }
 
 // ex36
@@ -756,13 +733,6 @@ int minInd (int v[], int n){
 
 // ex38
 
-/*
-Ac[0]=v[0]
-Ac[1]=v[0]+v[1]
-Ac[2]=v[0]+v[1]+v[2]
-Ac[3]=v[0]+v[1]+v[2]+v[3], ou seja Ac[3]=Ac[2]+v[3] 
-*/
-
 void somasAc(int v[], int Ac[], int N) {
     // Inicializa a primeira posição de Ac
     if (N > 0) {
@@ -774,7 +744,33 @@ void somasAc(int v[], int Ac[], int N) {
     }
 }
 
+/*
+explicação:
+
+/*
+Ac[0]=v[0]
+Ac[1]=v[0]+v[1]
+Ac[2]=v[0]+v[1]+v[2]
+Ac[3]=v[0]+v[1]+v[2]+v[3], ou seja Ac[3]=Ac[2]+v[3] 
+*/
+
 // ex39
+
+int triSup(int N, float m[N][N]) {
+    int i, j;
+
+    for (i = 1; i < N; i++) {
+        for (j = 0; j < i; j++) { 
+            if (m[i][j] != 0) {
+                return 0; 
+            }
+        }
+    }
+    return 1; 
+}
+
+/*
+sem dois returns:
 
 int triSup(int N, float m[N][N]) {
     int i, j, triangularSuperior = 1; // i representa as linhas e o j as colunas, temos de ter 0s quando j<i
@@ -788,21 +784,6 @@ int triSup(int N, float m[N][N]) {
     }
     return triangularSuperior; 
 
-}
-
-/*
-int main() {
-    float matriz[3][3] = {
-        {1, 2, 3},
-        {0, 5, 0},
-        {0, 0, 9}
-    };
-    if (triSup(3, matriz)) {
-        printf("A matriz é triangular superior.\n");
-    } else {
-        printf("A matriz não é triangular superior.\n");
-    }
-    return 0;
 }
 */
 
@@ -820,9 +801,6 @@ void transposta (int N, float m[N][N]) {
     }
 }
 
-// ver desenho na folha das 50 questoes
-
-
 // ex41
 
 void addTo(int N, int M, int a[N][M], int b[N][M]) {
@@ -833,20 +811,6 @@ void addTo(int N, int M, int a[N][M], int b[N][M]) {
         }
     }
 }
-
-/*
-int main(){
-    int a[3][4] = { {3,4,5,1}, {6, 7,8,1} ,{9,10,11,1}};
-    int b[3][4] = { {0,1, 2,1}, {3, 1,1,1},{1,1,1,1} };
-    addTo(3,4,a,b);
-    for (int i = 0; i < 3; i++) {
-        for(int j=0;j<4;j++){
-            printf("%d ", a[i][j]);
-        }
-    }
-    printf("\n");
-}
-*/
 
 // ex42
 
@@ -862,20 +826,6 @@ int unionSet(int N, int v1[N], int v2[N], int r[N]) {
     return 0; 
 }
 
-/*
-int main(){
-    int i;
-    int v1[8]={0,1,0,0,1,0,0,1};
-    int v2[8]={1,0,0,1,1,1,0,1};
-    int r[8];
-
-    unionSet(8,v1,v2,r);
-
-    for(i=0; i<8;i++) printf("%d",r[i]);
-    printf("\n");
-    return 0;
-}
-*/
 
 // ex43
 
@@ -918,11 +868,6 @@ int cardinalMSet (int N, int v[N]) {
     for(i = 0; i < N; i++) len += v[i];
     return len;
 }
-
-
-
-
-
 
 
 
