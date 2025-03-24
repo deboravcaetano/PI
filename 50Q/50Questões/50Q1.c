@@ -482,6 +482,21 @@ int limpaEspaços(char s[]) {
 
 // ex26
 
+void insere (int v[], int N, int x) {
+    int i, j, inserido = 0;
+    for(i = 0; i < N && !inserido; i++) {
+        if(x < v[i]) {
+            for(j = N; j > i; j--) {
+                v[j] = v[j - 1];
+            }
+            v[i] = x;
+            inserido = 1;
+        }
+    }
+    if(!inserido) v[N] = x;
+}
+
+
 // ex27
 
 void merge (int r [], int a[], int b[], int na, int nb){
