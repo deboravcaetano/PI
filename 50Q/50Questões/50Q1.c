@@ -869,6 +869,114 @@ int cardinalMSet (int N, int v[N]) {
     return len;
 }
 
+// ex47
+
+typedef enum movimento {
+    Norte, 
+    Oeste, 
+    Sul, 
+    Este
+    } Movimento;
+
+typedef struct posicao {
+        int x, y;
+        } Posicao;
+
+
+Posicao posFinal (Posicao inicial, Movimento mov[], int N){
+    int i;
+    for(i=0;i<N;i++){
+        if ((mov[i])==Norte){
+            inicial.y++;
+        }
+        else if((mov[i])==Sul){
+            inicial.y--;
+        }
+        else if((mov[i])==Oeste){
+            inicial.x--;
+        }
+        else if((mov[i])==Este){
+            inicial.x++;
+        }
+
+    }
+    return inicial;
+}
+
+/*
+int main(){
+    Movimento mov[5] = { Norte, Norte, Oeste, Sul, Oeste };
+    Posicao inicial = { 0, 0 };
+    Posicao final = posFinal(inicial, mov, 5);
+    printf("(%d, %d)\n", final.x, final.y);
+
+    return 0;
+
+}
+*/
+
+// ex48
+
+int caminho(Posicao inicial, Posicao final, Movimento mov[], int N) {
+    int i;
+    for(i = 0; i < N && (inicial.x != final.x || inicial.y != final.y); i++) {
+        if(inicial.x < final.x) {
+            inicial.x++;
+            mov[i] = Este;
+        }
+        else if(inicial.x > final.x) {
+            inicial.x--;
+            mov[i] = Oeste;
+        } 
+        else if(inicial.y < final.y) {
+            inicial.y++;
+            mov[i] = Norte;
+        }
+        else if(inicial.y > final.y) {
+            inicial.y--;
+            mov[i] = Sul;
+        }
+    }
+    if(inicial.x != final.x || inicial.y != final.y) return -1;
+    else return i;
+}
+
+// ex49
+
+int maisCentral(Posicao pos[], int N) {    
+    int indiceMP = 0;
+    int menorDist = pos[0].x * pos[0].x + pos[0].y * pos[0].y;
+
+    for (int i = 1; i < N; i++) {
+        int distancia = pos[i].x * pos[i].x + pos[i].y * pos[i].y; //x² + y²
+        if (distancia < menorDist) {
+            menorDist = distancia;
+            indiceMP = i;
+        }
+    }
+
+    return indiceMP;
+}
+
+// ex50
+
+int vizinho(Posicao a, Posicao b) {
+    int dx = abs(a.x - b.x); 
+    int dy = abs(a.y - b.y); 
+    return (dx + dy == 1); // 1 = adjacente
+}
+
+int vizinhos(Posicao p, Posicao pos[], int N) {
+    int cont = 0; 
+    for (int i = 0; i < N; i++) {
+        if (vizinho(p, pos[i])) {
+            cont++;
+        }
+    }
+    return cont;
+}
+
+
 
 
 
