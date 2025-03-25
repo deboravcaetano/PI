@@ -52,6 +52,11 @@ int segundoMaior(){
             smaior = maior;
             maior = n;
         }
+        else{
+            if(n>smaior){
+                smaior=n;
+            }
+        }
     }
 
     return smaior;
@@ -309,7 +314,7 @@ int difConsecutivos(char s[]) {
     int i,j;
     
     for(i = 0; s[i]; i++) {
-        int compAtual = 0; // comprimento atual
+        int compAtual = 0; // comprimento
         
         // Expande a substring enquanto os caracteres forem únicos
         for(int j = 0; s[i + j] && caracter_nao_repetido(s + i, j); j++) { 
@@ -411,7 +416,7 @@ int contaVogais(char s[]) {
 
 // ex22
 
-// verifica se o caracter de da string a existe na string b
+// verifica se o caracter da string a existe na string b
 int charCont(char c, char z[]) {
     int i;
     for (i = 0; z[i] != '\0'; i++) {
@@ -826,6 +831,22 @@ int comuns (int a[], int na, int b[], int nb){
     } 
     return iguais; 
     
+}
+
+int elem(int e, int *v, int N) {
+    int i, ans = 0;
+    for(i = 0; i < N && !ans; i++)
+        if(e == v[i])
+            ans = 1;
+    return ans;
+}
+
+int comuns (int a[], int na, int b[], int nb) {
+    int i, ans = 0;
+    for(int i = 0; i < na; i++) {
+        if(elem(a[i], b, nb)) ans++;
+    }
+    return ans;
 }
 
 // ex37
