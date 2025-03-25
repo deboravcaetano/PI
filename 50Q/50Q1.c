@@ -636,7 +636,7 @@ int maxCresc (int v[], int N){
 
 // ex33
 
-int elimRep(int v[], int n) {
+int * elimRep(int v[], int n) {
     int i;
     int j = 0; 
     for (i = 0; i < n; i++) {
@@ -652,8 +652,37 @@ int elimRep(int v[], int n) {
         }
     }
 
+    return v; 
+}
+
+/*
+com array auxiliar:
+
+int elimRep(int v[], int n) {
+    int aux[n]; 
+    int j = 0; 
+
+    // Elimina duplicatas
+    for (int i = 0; i < n; i++) {
+        int ehDuplicacao = 0; 
+        for (int k = 0; k < j; k++) { 
+            if (v[i] == aux[k]) {  
+                ehDuplicacao = 1; 
+            }
+        }        
+        if (!ehDuplicacao) {
+            aux[j] = v[i]; 
+            j++; 
+        }
+    }
+    // novo array agora tem j elementos
+    for (int i = 0; i < j; i++) {
+        v[i] = aux[i];
+    }
+
     return j; 
 }
+*/
 
 /*
 explicação:
