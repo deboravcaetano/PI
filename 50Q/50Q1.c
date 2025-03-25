@@ -293,6 +293,38 @@ int iguaisConsecutivos (char s[]) {
 
 // ex16
 
+//Verifica se o caracter na posição 'pos','j' atua, já apareceu antes na string
+int caracter_nao_repetido(char s[], int pos) {
+    for(int i = 0; i < pos; i++) {
+        if(s[i] == s[pos]) {
+            return 0; // Encontrou caracter repetido
+        }
+    }
+    return 1; // Nenhum caracter repetido encontrado
+}
+
+
+int difConsecutivos(char s[]) {
+    int maiorC = 0; // Armazena o maior comprimento encontrado
+    int i,j;
+    
+    for(i = 0; s[i]; i++) {
+        int compAtual = 0;
+        
+        // Expande a substring enquanto os caracteres forem únicos
+        for(int j = 0; s[i + j] && caracter_nao_repetido(s + i, j); j++) {
+            compAtual++;
+        }
+        
+        // Atualiza o maior comprimento se necessário
+        if(compAtual > maiorC) {
+            maiorC = compAtual;
+        }
+    }
+    
+    return maiorC;
+}
+
 // ex17
 
 int maiorPrefixo (char s1 [], char s2 []) {
