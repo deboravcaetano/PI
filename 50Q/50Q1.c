@@ -309,7 +309,7 @@ int difConsecutivos(char s[]) {
     int i,j;
     
     for(i = 0; s[i]; i++) {
-        int compAtual = 0;
+        int compAtual = 0; // comprimento atual
         
         // Expande a substring enquanto os caracteres forem únicos
         for(int j = 0; s[i + j] && caracter_nao_repetido(s + i, j); j++) { 
