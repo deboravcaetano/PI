@@ -558,8 +558,6 @@ int retiraNeg(int v[], int N) {
             j++; 
         }
     }
-
-
     return j;
 }
 
@@ -636,7 +634,7 @@ int maxCresc (int v[], int N){
 
 // ex33
 
-int * elimRep(int v[], int n) {
+int  elimRep(int v[], int n) {
     int i;
     int j = 0; 
     for (i = 0; i < n; i++) {
@@ -652,7 +650,7 @@ int * elimRep(int v[], int n) {
         }
     }
 
-    return v; 
+    return j; 
 }
 
 /*
@@ -662,7 +660,7 @@ int elimRep(int v[], int n) {
     int aux[n]; 
     int j = 0; 
 
-    // Elimina duplicatas
+    
     for (int i = 0; i < n; i++) {
         int ehDuplicacao = 0; 
         for (int k = 0; k < j; k++) { 
