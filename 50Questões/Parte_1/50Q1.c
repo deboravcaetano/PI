@@ -40,25 +40,35 @@ float mediaSequencia() {
 
 // ex3
 
-int segundoMaior(){
-    int n, maior=0, smaior=0;
+int segundoMaior() {
+    int n, maior, smaior;
 
     scanf("%d", &n);
-    maior=n;
+    if(n==0) return 0;
 
-    while(n!=0){
-        scanf("%d", &n);
-        if(n>maior){
-            smaior = maior;
-            maior = n;
-        }
-        else{
-            if(n>smaior){
-                smaior=n;
-            }
-        }
+    maior = n;
+    smaior = n; 
+    
+    scanf("%d", &n);
+    if(n==0) return smaior;
+
+    if (n > maior) {
+        smaior = maior;
+        maior = n;
+    } else if (n < maior) {
+        smaior = n;
     }
 
+    while (n!=0) {
+        scanf("%d", &n);
+        if (n > maior) {
+            smaior = maior;
+            maior = n;
+        } else if (n < maior && n > smaior) {
+            smaior = n;
+        }
+
+    }
     return smaior;
 }
 
@@ -298,7 +308,7 @@ int iguaisConsecutivos (char s[]) {
 
 // ex16
 
-//Verifica se o caracter na posição 'pos','j' atua, já apareceu antes na string
+//Verifica se o caracter na posição 'pos','j' atual, já apareceu antes na string
 int caracter_nao_repetido(char s[], int pos) {
     for(int i = 0; i < pos; i++) {
         if(s[i] == s[pos]) {
@@ -821,18 +831,6 @@ int comunsOrd(int a[], int na, int b[], int nb) {
 
 // ex36
 
-int comuns (int a[], int na, int b[], int nb){
-    int i;
-    int iguais=0;
-    for(i=0; i<na;i++){
-        for(int j=0;j<nb;j++){
-            if(a[i]==b[j]) iguais++;
-        }
-    } 
-    return iguais; 
-    
-}
-
 int elem(int e, int *v, int N) {
     int i, ans = 0;
     for(i = 0; i < N && !ans; i++)
@@ -843,7 +841,7 @@ int elem(int e, int *v, int N) {
 
 int comuns (int a[], int na, int b[], int nb) {
     int i, ans = 0;
-    for(int i = 0; i < na; i++) {
+    for(i = 0; i < na; i++) {
         if(elem(a[i], b, nb)) ans++;
     }
     return ans;
