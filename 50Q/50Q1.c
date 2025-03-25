@@ -148,6 +148,31 @@ int strcmp(const char s1[], const char s2[]) {
 
 // ex10
 
+char* strstr(char s1[], char s2[]) {
+    int i1, i2;
+    int encontrada;
+    
+    // Se s2 for vazio, retorna s1 
+    if (s2[0] == '\0') {
+        return s1;
+    }
+    
+    for (i1 = 0; s1[i1] != '\0'; i1++) {
+        encontrada = 1;
+        for (i2 = 0; s2[i2] != '\0'; i2++) {
+            if (s2[i2] != s1[i1 + i2]) {
+                encontrada = 0;
+                break; // pula para o próximo i1
+            }
+        }
+        if (encontrada == 1) {
+            return s1 + i1;
+        }
+    }
+    
+    return NULL;
+}
+
 // ex11
 
 int tamanhoString(char s[]) {
@@ -1017,6 +1042,8 @@ int vizinhos(Posicao p, Posicao pos[], int N) {
     }
     return cont;
 }
+
+
 
 
 
