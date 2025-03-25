@@ -312,7 +312,7 @@ int difConsecutivos(char s[]) {
         int compAtual = 0;
         
         // Expande a substring enquanto os caracteres forem únicos
-        for(int j = 0; s[i + j] && caracter_nao_repetido(s + i, j); j++) {
+        for(int j = 0; s[i + j] && caracter_nao_repetido(s + i, j); j++) { 
             compAtual++;
         }
         
@@ -324,6 +324,17 @@ int difConsecutivos(char s[]) {
     
     return maiorC;
 }
+
+/*
+Porque i+j?
+
+1) 'i' marca o inicio da subtring 
+2) 'j' o deslocamento a partir desse ponto
+
+Quando estamos a procurar  a maior substring sem caracteres repetidos, precisamos:
+ 1) Fixar um ponto de início (i) na string principal
+ 2) Expandir a partir desse ponto (j) enquanto os caracteres forem únicos
+*/
 
 // ex17
 
