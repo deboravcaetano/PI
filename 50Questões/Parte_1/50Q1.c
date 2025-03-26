@@ -11,7 +11,7 @@ int maiorSequencia() {
 
     while (n != 0) {
         scanf("%d", &n);
-        if (n > maior && n != 0) {
+        if (n > maior ) {
             maior = n;
         }
     }
