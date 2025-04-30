@@ -320,16 +320,21 @@ LInt appendL (LInt *l, int e){
 
 // 15
 
-void concatL (LInt *a, LInt b){
-    LInt *p;
-    p = &a;
-
-    while(*p!=NULL){
-        p=&((*p)->prox);
+void concatL(LInt *a, LInt b) {
+    // Se a lista *a está vazia, basta apontá-la para b
+    if (*a == NULL) {
+        *a = b;
+    } else {
+        LInt p = *a;
+        // Percorre até o último nó
+        while (p->prox != NULL) {
+            p = p->prox;
+        }
+        // Liga o último nó de *a ao início de b
+        p->prox = b;
     }
-    *p=b;
-    return a;
 }
+
 
 // 16
 
@@ -343,13 +348,17 @@ LInt cloneL(LInt l) {
     l = l->prox;
 
     while (l != NULL) {
+        // Cria uma célula para a qual prox aponta
         celula->prox = malloc(sizeof(struct lligada));
+        // Atualizamos celula para apontar para essa nova celula
         celula = celula->prox;
+        // Copiamos o valor para a nova celula
         celula->valor = l->valor;
+        // Avançamos
         l = l->prox;
     }
 
-    celula->prox = NULL; // fim da lista
+    celula->prox = NULL; // Fim da lista
     return in;
 }
 
@@ -358,9 +367,11 @@ LInt cloneL(LInt l) {
 // 18
 
 int maximo(LInt l) {
-    int maior = l->valor; // Inicializa com o primeiro valor da lista
+    // Inicializa com o primeiro valor da lista
+    int maior = l->valor;
 
     l = l->prox;
+
     while (l != NULL) {
         if (l->valor > maior) {
             maior = l->valor;
