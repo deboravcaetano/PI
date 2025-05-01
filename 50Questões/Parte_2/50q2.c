@@ -1,5 +1,7 @@
-// PARTE 2 : 50 QUESTÕES
+// 50 QUESTÕES
 
+
+// PARTE 1: LISTAS LIGADAS
 
 #include <stdlib.h>
 
@@ -244,7 +246,7 @@ int removeMaiorL(LInt *l) {
     // Remover o nó do maior elemento
     if (!antMaiorV) { // Remove no início
         *l = (*l)->prox;
-    } else {          // Remove no fim
+    } else {          // Remove no meio ou fim
         antMaiorV->prox = noMaior->prox;
     }
     free(noMaior);
@@ -255,8 +257,6 @@ int removeMaiorL(LInt *l) {
 // 13
 
 void init(LInt *l) {
-    if (*l == NULL) return; // Lista vazia, não faz nada
-
     LInt p = *l;
     LInt ant = NULL;
 
@@ -285,8 +285,6 @@ void appendL (LInt *l, int e){
     LInt celula = malloc(sizeof(struct lligada));
     celula->valor = e;
     celula->prox=NULL;
-
-    if((*l) == NULL) (*l) = celula;
 
     while((*l)->prox != NULL){
         l = &((*l)->prox);
@@ -364,6 +362,12 @@ LInt cloneL(LInt l) {
 
 // 17
 
+LInt cloneRev (LInt l){
+    LInt clone = cloneL(l);
+
+    return reverse(clone);
+}
+
 // 18
 
 int maximo(LInt l) {
@@ -383,6 +387,258 @@ int maximo(LInt l) {
 }
 
 // 19
+
+int take (int n, LInt *l){
+    int cont = 0;
+    LInt in = *l;
+
+    while( cont < n && *l != NULL ){
+          *l= (*l)->prox;
+          cont ++;
+    }
+
+    if((*l) == NULL){
+        return cont;
+    }
+
+    else {
+        while((*l) != NULL){
+            LInt temp = (*l)->prox;
+            free(*l); // Dúvida, não estaria a libertar também o n-ésimo?
+            *l = temp;
+        }
+    }
+    return n;
+
+}
+
+int take(int n, LInt *l) {
+    LInt p = *l;
+    int cont = 0;
+
+    // Percorrer até ao (n-1)-ésimo elemento
+    while (p != NULL && cont < n - 1) {
+        p = p->prox;
+        cont++;
+    }
+
+    // Se lista tinha menos de n elementos
+    if (p == NULL)
+        return cont;
+
+    // Libertar a partir do n-ésimo
+    LInt libert = p->prox;
+    p->prox = NULL;  // cortar a lista aqui
+    while (libert != NULL) {
+        LInt temp = libert->prox;
+        free(libert);
+        libert = temp;
+    }
+
+    return n;
+}
+
+
+// 20
+
+int drop(int n, LInt *l) {
+    int cont = 0;
+
+    while (*l != NULL && cont < n) {
+        LInt temp = *l;       // guarda o nó atual
+        *l = (*l)->prox;      // avança a cabeça da lista
+        free(temp);           // liberta o nó antigo
+        cont++;
+    }
+
+    return cont;
+}
+
+
+// 21
+
+LInt Nforward (LInt l, int N){
+    while(N > 0){
+        l = l->prox;
+        N--;
+    }
+    return l;
+}
+
+// 22
+
+int listToArray (LInt l, int v[], int N){
+    int i;
+    
+    for(i = 0; i < N && l != NULL; i++, l = l->prox){
+        v[i] = l->valor;
+    }
+    
+    return i;
+}
+
+// 23
+LInt new(int h, LInt t){
+    LInt r = malloc(sizeof(struct lligada));
+    r -> valor = h;
+    r -> prox = t;
+    return r;
+}
+
+LInt arrayToList(int v[], int N) {
+    LInt r = NULL;
+    int i;
+    for (i = N - 1; i >= 0; i--) {
+        r = new(v[i], r);
+    }
+    return r;
+}
+
+// 24
+
+
+LInt new(int h, LInt t) {
+    LInt r = malloc(sizeof(struct lligada));
+    r->valor = h;
+    r->prox = t;
+    return r;
+}
+
+
+LInt somasAcL(LInt l) {
+    int soma = 0;
+    LInt lista = NULL;
+
+    while (l != NULL) {
+        soma += l->valor; 
+        lista = new(soma, lista); 
+        l = l->prox; 
+    }
+    
+    // Ter cuidado quando a lista é construída ao contrário
+    return reverse(lista); 
+}
+
+// 25
+
+void remreps(LInt l) {
+    if(l != NULL) {
+        while(l->prox != NULL) {
+            if(l->prox->valor == l->valor) {
+                LInt temp = l->prox;
+                l->prox = temp->prox;
+                free(temp);
+            }
+            else l = l->prox;
+        }
+    }
+}
+
+// 26
+
+LInt rotateL(LInt l) {
+    // Se for vazia ou tiver apenas um elemento, não há qualquer efeito
+    if (!l || !(l->prox)) return l;
+
+    LInt p = l;
+    // Identificar o último nó
+    while (p->prox != NULL) {
+        p = p->prox;
+    }
+
+    // O último nó agora aponta para o primeiro
+    p->prox = l;
+
+    // O primeiro nó agora vai para o fim, então ajustamos o ponteiro 'prox' para NULL
+    l = l->prox;
+    p->prox->prox = NULL;
+
+    return l;
+}
+
+// 27
+
+LInt parte(LInt l) {
+    // Vazia ou só um elemento
+    if(!l || !l->prox) return NULL;
+
+    // Primeria posição par
+    LInt newL = l->prox;
+
+    // Atualiza l
+    l->prox = l->prox->prox;
+
+    // Recursividade
+    newL->prox = parte(l->prox);
+
+    return newL;
+}
+
+// PARTE 2: ÁRVORES BINÁRIAS
+
+typedef struct nodo {
+        int valor;
+        struct nodo *esq, *dir;
+} *ABin;
+
+
+// 28
+
+
+int max(int a, int b) {
+    if (a > b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+
+int altura(ABin a) {
+    if (!a) return 0;  // Caso base: árvore vazia
+
+    int alturaEsq = altura(a->esq);
+    int alturaDir = altura(a->dir);
+
+    
+    return (1 + max(alturaEsq, alturaDir));
+}
+
+// 29
+
+ABin cloneAB(ABin a) {
+    if(a == NULL) return NULL;
+
+    ABin nodo = malloc(sizeof(struct nodo));
+    nodo->valor = a->valor;
+    nodo->esq = cloneAB(a->esq);
+    nodo->dir = cloneAB(a->dir);
+
+    return nodo;
+}
+
+// 30
+
+void mirror(ABin * tree) {
+    if((*tree) != NULL) {
+        ABin temp = (*tree)->esq;
+        (*tree)->esq = (*tree)->dir;
+        (*tree)->dir = temp;
+
+        mirror(&((*tree)->esq));
+        mirror(&((*tree)->dir));
+    }
+}
+
+// 31
+
+
+
+
+
+
+
+
+
 
 
 
