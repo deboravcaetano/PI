@@ -29,7 +29,7 @@ void freeL(LInt l){
     while(l != NULL){
         temp = l;      // Guarda o nó atual
         l = l->prox;   // Avança
-        free(temp);       // Liberta o nó atual
+        free(temp);    // Liberta o nó atual
     } 
 }
 
@@ -162,7 +162,7 @@ LInt parteAmeio (LInt *l){
 
     if(meio == 0) return NULL;
 
-    LInt y = *l;   // // Aponta para o início da primeira metade
+    LInt y = *l;     // Aponta para o início da primeira metade
     LInt ant = NULL; // Guarda o último nó da primeira metade
 
     while(nElem < meio) {
@@ -227,10 +227,10 @@ int removeDups (LInt *l) {
 
 int removeMaiorL(LInt *l) {
     int maiorValor = (*l)->valor; // Armazena o maior valor encontrado.
-    LInt ant = NULL; // Guarda o nó anterior ao nó atual
-    LInt antMaiorV = NULL; // Guarda o nó anterior ao nó com o maior valor encontrado até o momento
-    LInt noMaior = *l; // Aponta para o nó com o maior valor.
-    LInt p = *l;
+    LInt ant = NULL;              // Guarda o nó anterior ao nó atual
+     LInt p = *l;                 // Avança na lista
+    LInt antMaiorV = NULL;        // Guarda o nó anterior ao nó com o maior valor encontrado até o momento
+    LInt noMaior = *l;            // Aponta para o nó com o maior valor.
 
     // Encontrar o maior elemento
     while (p != NULL) {
@@ -387,31 +387,7 @@ int maximo(LInt l) {
 }
 
 // 19
-
-int take (int n, LInt *l){
-    int cont = 0;
-    LInt in = *l;
-
-    while( cont < n && *l != NULL ){
-          *l= (*l)->prox;
-          cont ++;
-    }
-
-    if((*l) == NULL){
-        return cont;
-    }
-
-    else {
-        while((*l) != NULL){
-            LInt temp = (*l)->prox;
-            free(*l); // Dúvida, não estaria a libertar também o n-ésimo?
-            *l = temp;
-        }
-    }
-    return n;
-
-}
-
+//////////////REVER
 int take(int n, LInt *l) {
     LInt p = *l;
     int cont = 0;
@@ -445,9 +421,9 @@ int drop(int n, LInt *l) {
     int cont = 0;
 
     while (*l != NULL && cont < n) {
-        LInt temp = *l;       // guarda o nó atual
-        *l = (*l)->prox;      // avança a cabeça da lista
-        free(temp);           // liberta o nó antigo
+        LInt temp = *l;       // Guarda o nó atual
+        *l = (*l)->prox;      // Avança a cabeça da lista
+        free(temp);           // Liberta o nó antigo
         cont++;
     }
 
@@ -583,7 +559,6 @@ typedef struct nodo {
 
 
 // 28
-
 
 int max(int a, int b) {
     if (a > b) {
