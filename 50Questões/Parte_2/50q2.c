@@ -163,14 +163,14 @@ LInt parteAmeio (LInt *l){
     if(meio == 0) return NULL;
 
     LInt y = *l;     // Aponta para o início da primeira metade
-    LInt ant = NULL; // Guarda o último nó da primeira metade
+    LInt p = NULL; // Guarda o último nó da primeira metade
 
     while(nElem < meio) {
-        ant = (*l); // ant aponta para o nó atual
+        p = (*l); // ant aponta para o nó atual
         (*l) = (*l)->prox;
         nElem++;
     }
-    ant->prox = NULL; // Corta a ligação entre as duas metades
+    p->prox = NULL; // Corta a ligação entre as duas metades
     return y;
 }
 
