@@ -10,8 +10,7 @@ int calcula(char s[]) {
         char c = s[i];
 
         if (isdigit(c)) {
-            stack[sp] = c - '0';
-            sp ++;
+            stack[sp++] = c - '0';
         } else if (c == '+' || c == '*') {
             int b = stack[--sp];  // segundo operando
             int a = stack[--sp];  // primeiro operando
