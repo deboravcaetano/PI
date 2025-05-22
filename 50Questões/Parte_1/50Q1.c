@@ -219,7 +219,7 @@ int strnoV(char t[]) {
     int i, j = 0; // 'i' percorre o array original e 'j' ajuda a construir o novo array
 
     for (i = 0; t[i] != '\0'; i++) {
-        if (vogal([i])) { // se não é uma vogal, apenas avança no 'i' e não no 'j'
+        if (vogal(t[i])) { // se não é uma vogal, apenas avança no 'i' e não no 'j'
         } else {
             t[j] = t[i]; 
             j++; 
@@ -247,10 +247,10 @@ void strnoV(char s[]) {
 
 char truncW(char t[], int n) {
     int i;
-    int j=0;
+    int j = 0;
     int contLetras = 0;  
 
-    for(i=0;t[i]!='\0';i++){
+    for(i = 0; t[i] != '\0'; i++){
         if (contLetras < n && t[i] != ' ') { // segunda condição: para não contar o espaço como um caracter caso contLetras < n
             t[j] = t[i];
             j++;

@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 
 void merge (int r[], int a[], int na, int b[], int nb){
     // Percorre o a
@@ -29,13 +31,14 @@ void mergeSort(int v[], int nv){
         int direita[nv - meio];
 
         for(int i = 0; i < meio; i++) esquerda[i] = v[i];
-        for(int i = 0; i < nv - meio; i++) direita[i] = v[meio + 1];
+        for(int i = 0; i < nv - meio; i++) direita[i] = v[meio + i];
 
         mergeSort(esquerda, meio);
         mergeSort(direita, nv - meio);
         merge(v, esquerda, meio, direita, nv-meio);
     }
 }
+
 
 
 
@@ -58,6 +61,32 @@ int procura (int v[], int n, int e){
 }
 
 
+/*
+int delete(int n, LInt *l){
+    int i;
+    for(i = 0; i < n && *l != NULL; i++){
+        // Avança com o ponteiro
+        l= &(*l)->prox;
+    }
+    if (*l == NULL) return 1;
 
+    LInt temp = *l;
+    // Avança a lista mexendo no conteúdo
+    *l = (*l) -> prox;
+    free(temp);
+    return 0;
+}
+*/
+
+
+
+
+int main(){
+    int a[] = {44,3677,118,119000};
+    int i = procura(a,4,118635);
+    printf("%d\n",i);
+
+    return 0;
+}
 
 
